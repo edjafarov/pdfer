@@ -1,0 +1,17 @@
+{
+  "name":"pdfer",
+  "version": "0.0.1",
+  "dependencies":{
+    "nconf":"0.6.4",
+    "express":"3.0.x",
+    "async":"0.1.22"
+  },
+  "devDependencies":{
+    "mocha":"latest"
+  },
+  "main":"./lib/pdfer.js",
+  "scripts":{
+    "start":"node ./lib/service.js",
+    "test":"mocha"
+  }
+}
