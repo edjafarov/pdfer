@@ -6,6 +6,10 @@
     "express":"3.0.x",
     "async":"0.1.22"
   },
+  "engines": {
+    "node": "0.8.x",
+    "npm":  "1.1.x"
+  }  
   "devDependencies":{
     "mocha":"latest"
   },
