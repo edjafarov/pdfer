@@ -1,1 +1,1 @@
-web: node lib\service.js
+web: node ./lib/service.js
