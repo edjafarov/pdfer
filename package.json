@@ -17,6 +17,6 @@
   "main":"./lib/pdfer.js",
   "scripts":{
     "start":"node ./lib/service.js",
-    "test":"./node_modules/.bin/mocha --reporter spec ./test/integration"
+    "test":"./node_modules/.bin/mocha --reporter spec"
   }
 }

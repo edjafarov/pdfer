@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var http = require('http');
 var url = require('url');
 var port = 1107;
-var pdfer = require("../../lib/pdfer.js")();
+var pdfer = require("../lib/pdfer.js")();
 var util = require("util");
 var expect = require("chai").expect;
 
