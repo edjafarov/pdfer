@@ -6,7 +6,7 @@ var pdfer = require("../lib/pdfer.js")();
 var util = require("util");
 var expect = require("chai").expect;
 
-describe("pdfer should generate pdf's ", function(){
+describe("pdfer should generate pdf's and ", function(){
   before(function(done){
     http.createServer(function(req, res){
       var path = url.parse(req.url).path;
@@ -23,10 +23,32 @@ describe("pdfer should generate pdf's ", function(){
         res.writeHead(500);
         return res.end();
       }
+      if(path === "/timeout"){
+        res.writeHead(200);
+        //timeout
+        return;
+      }
       res.end();
     }).listen(port);  
     done();
   })
+
+  it(" be able to fail 412 if timeouts",function(done){
+    var ORIG_TIMEOUT = process.env.GEN_TIMEOUT || 3000;
+    var pdfStream = pdfer.genFromUrl(util.format("http://localhost:%s/timeout", port));
+    var pdf = "";
+    process.env.GEN_TIMEOUT = 20;
+    pdfStream.on('error', function(err){
+      expect(err.code).to.be.equal(412);
+      expect(err.message).to.be.equal("pdf generation timeout");
+      process.env.GEN_TIMEOUT= ORIG_TIMEOUT;
+      done();
+    })
+    pdfStream.on('data', function(data){
+      pdf += data;
+    });
+  })
+
 
   it(" be able to generate pdf out of url successfully",function(done){
     var pdfStream = pdfer.genFromUrl(util.format("http://localhost:%s/true", port));
@@ -65,8 +87,4 @@ describe("pdfer should generate pdf's ", function(){
       pdf += data;
     });
   })
-
-
-
-
 })
